@@ -6,8 +6,8 @@ Frédéric Malharin
 Analysis of a dataset related to SARS-COV2 with Python in Jupyter Notebooks and Spyder
 The goal is to predict the result of the boolean variable "SARS-Cov-2 exam result"
 
-This dataset comes from the course Machine Learnia (https://machinelearnia.com)
-Many thanks to Guillaume Saint-Cirgue
+dataset : https://www.kaggle.com/einsteindata4u/covid19
+Many thanks to Guillaume Saint-Cirgue and Machine Learnia
 
 
 FIRST PART : EXPLORATION OF THE DATASET
