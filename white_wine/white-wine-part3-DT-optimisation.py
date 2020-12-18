@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-21/11/2020
-Frédéric Malharin
-
+18/12/2020
 Analysis of a dataset related to wine quality.
-With Python 3.8 (IDE : Jupyter Notebooks and Spyder)
+With Python 3.8 (IDE : Spyder)
 The goal is to predict the result of the quality value (integers from 1 to 10) based on the chemicals properties.
 
 This dataset comes from UCI Machine Learning Repository
 https://archive.ics.uci.edu/ml/datasets/Wine+Quality
 
 PART 3 : Optitmisation of a Decision Tree Classifier model
-
 """
 
 import numpy as np
