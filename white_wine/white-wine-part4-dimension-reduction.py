@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-21/11/2020
-Frédéric Malharin
-
+18/12/2020
 Analysis of a dataset related to wine quality.
 With Python 3.8 (IDE : Jupyter Notebooks and Spyder)
 The goal is to predict the result of the quality value (integers from 1 to 10) based on the chemicals properties.
 
 This dataset comes from UCI Machine Learning Repository
 https://archive.ics.uci.edu/ml/datasets/Wine+Quality
-
 
 PART 4 : DIMENSIONALITY REDUCTION
 Let's try to reduce dimensionality in order to reduce overfitting of the DecisionTree model.
