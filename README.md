@@ -1,5 +1,5 @@
 # Python and Machine learning projects
 
-In this repository, I will publish datasets and scripts of projects I've done with Python.
+I publish here datasets and scripts of data science projects I have done.
 
 Feel free to reach out, comment, suggest improvements, anything that will help me improve.
