@@ -1,0 +1,64 @@
+-- ALL INVOICES SINCE 2018
+
+USE XXXXXXXXXXXX
+
+SELECT
+FORMAT(CAST(ih_datetime AS DATE), 'dd/MM/yyyy')		AS				INVOICE_DATE
+,DATENAME(WEEKDAY, ih_datetime)				AS				WEEK_DAY
+,YEAR(ih_datetime)					AS				YEAR
+,DATENAME(MONTH, ih_datetime)				AS				MONTH
+,DAY(ih_datetime)					AS				DAY
+,ih_number						AS				INVOICE_NUMBER
+,cd_id							AS				CUSTOMER_ID
+,cd_invoice_country_code				AS				COUNTRY
+,c_currency_code					AS				CURRENCY
+,oh_sot_id						AS				ORDER_TYPE
+
+
+,CASE
+WHEN	oh_sot_id = 4	THEN	(CASE
+	WHEN	c_currency_code = 'EUR'	THEN		CAST((ih_foreign_net - ih_foreign_del_net)*(-1) AS DECIMAL(10,2))
+	ELSE						CAST(((ih_foreign_net - ih_foreign_del_net)*(-1)*1.12/ih_exchange_rate) AS DECIMAL(10,2))
+	END)
+
+WHEN	oh_sot_id = 1 THEN (CASE
+	WHEN	c_currency_code = 'EUR'	THEN		CAST((ih_foreign_net - ih_foreign_del_net) AS DECIMAL(10,2))
+	ELSE						CAST(((ih_foreign_net - ih_foreign_del_net)*1.12/ih_exchange_rate) AS DECIMAL(10,2))
+	END)
+ELSE	'ERROR'
+END	AS INVOICES_EUR_NET
+
+
+FROM		invoice_header
+LEFT JOIN	order_header				ON		ih_oh_id = oh_id
+LEFT JOIN	order_line_item				ON		oh_id = oli_oh_id
+LEFT JOIN	variant_detail				ON		oli_vad_id = vad_id
+LEFT JOIN	variant_analysis			ON		vad_id = vaa_vad_id
+LEFT JOIN	customer_detail				ON		ih_cd_id = cd_id
+LEFT JOIN	currency				ON		ih_c_id = c_id
+LEFT JOIN	variant_category			ON		vad_id = vac_vad_id
+
+WHERE
+
+NOT (cd_invoice_country_code = 'GB'			OR		cd_invoice_country_code = 'IE')
+AND
+oh_sl_id=XXXXXXXXXXXX
+AND
+oh_cust_order_ref NOT LIKE '%reinvoice%'
+AND
+YEAR(ih_datetime) >= '2018'
+
+
+GROUP BY
+ih_datetime
+,ih_number
+,cd_id	
+,cd_invoice_country_code
+,c_currency_code
+,oh_sot_id
+,ih_foreign_net
+,ih_foreign_del_net
+,ih_exchange_rate
+
+ORDER BY
+ih_number

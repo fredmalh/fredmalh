@@ -1,0 +1,46 @@
+-- TOP 100 CUSTOMERS LAST 24 MONTHS
+
+USE XXXXXXXXXXXX
+
+SELECT TOP 100
+cd_id						AS		Customer_ID,
+cd_statement_name				AS		Customer_Name,
+cd_invoice_country_code				AS		Country_Code,
+COUNT(DISTINCT oh_id)				AS		Number_Of_Orders,
+CAST(SUM(oht_net*1.17) AS DECIMAL(10,2))	AS		Customer_Expenses_Net_EUR
+
+
+/*
+Customer_ID
+Customer_Name
+Country_Code
+Customer_Expenses_Net_EUR
+*/
+
+FROM order_header
+LEFT JOIN	customer_detail			ON		oh_cd_id = cd_id
+LEFT JOIN	order_header_total		ON		oh_id = oht_oh_id
+LEFT JOIN	order_line_item			ON		oh_id = oli_oh_id
+LEFT JOIN	variant_detail			ON		oli_vad_id = vad_id
+LEFT JOIN	variant_analysis		ON		vad_id = vaa_vad_id
+
+WHERE
+oli_sl_id = XXXXXXXXXXXX			-- sl = stock_location		XXXXXXXXXXXX = main warehouse
+AND
+oh_sot_id = XXXXXXXXXXXX			-- sot = system_order_type	XXXXXXXXXXXX = order
+AND
+oh_cust_order_ref NOT LIKE '%reinvoice%'
+AND
+cd_id NOT LIKE 'XXXXXXXXXXXX'			-- Excludes XXXXXXXXXXXX
+AND
+cd_statement_name NOT LIKE 'XXXXXXXXXXXX'	-- Excludes XXXXXXXXXXXX
+AND
+(oh_datetime >= '2019-09-01 00:00:01' AND oh_datetime <= '2021-08-31 23:59:59')
+
+GROUP BY
+cd_id,
+cd_statement_name,
+cd_invoice_country_code
+
+ORDER BY
+Customer_Expenses_Net_EUR DESC
