@@ -1,1 +1,6 @@
 Here are some of examples of projects I did with Excel
+
+
+Sales data & dashboard.xlsx is an example of business dashboard made out of invented data.
+
+Sport climbing data and dashboard is a spreadsheed and dashboard that I use to follow my own sport climbing record.
