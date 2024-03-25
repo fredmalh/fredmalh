@@ -1,0 +1,5 @@
+Here are some examples of data analysis with Tableau.
+They are published on tableau public. Use the link to access them.
+
+King County House Prices :
+https://public.tableau.com/app/profile/fr.d.ric.malharin/viz/KingCountyHousePrices_17113862274340/KINGCOUNTYHOUSESALES?publish=yes
