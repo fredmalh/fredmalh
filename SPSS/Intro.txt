@@ -1,0 +1,4 @@
+Here are some of examples of projects I did with SPSS Statistics
+
+
+ChatGPT review : the analysis of a dataset containing users reviews about chat GPT
